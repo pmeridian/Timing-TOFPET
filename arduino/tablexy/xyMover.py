@@ -47,10 +47,10 @@ class XYMover:
 
     def moveAbsolute(self,pos,direction):
         if (direction == 'x'):
-            self.my_socket.send(bytes('%3.1f %3.1f'%(pos,self.y)))
+            self.my_socket.send(bytes('%3.1f %3.1f'%(round(pos,1),self.y)))
             #self.my_socket.send(bytes('%d %d'%(pos,self.y),'utf-8'))#python3
         elif (direction == 'y'):
-            self.my_socket.send(bytes('%3.1f %3.1f'%(self.x,pos)))
+            self.my_socket.send(bytes('%3.1f %3.1f'%(self.x,round(pos,1))))
             #self.my_socket.send(bytes('%d %d'%(self.x,pos),'utf-8'))#python3
         response = self.getSocketResponse()
         if not response.startswith('ok'):
@@ -65,9 +65,9 @@ class XYMover:
                 return 'error'
             else:
                 if (direction == 'x'):
-                    self.x=pos
+                    self.x=round(pos,1)
                 elif (direction == 'y'):
-                    self.y=pos
+                    self.y=round(pos,1)
                 return 'ok'
         
     def moveAbsoluteXY(self,x,y):
